@@ -1,0 +1,2 @@
+mkdir -p %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/
+ln -s ../swupd-overdue.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/swupd-overdue.service
