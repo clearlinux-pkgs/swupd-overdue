@@ -4,19 +4,28 @@
 #
 Name     : swupd-overdue
 Version  : 1
-Release  : 1
+Release  : 2
 URL      : https://github.com/clearlinux/swupd-overdue/releases/download/v1/swupd-overdue-1.tar.xz
 Source0  : https://github.com/clearlinux/swupd-overdue/releases/download/v1/swupd-overdue-1.tar.xz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-3.0
 Requires: swupd-overdue-bin
+Requires: swupd-overdue-autostart
 Requires: swupd-overdue-config
 Requires: swupd-overdue-doc
 BuildRequires : pkgconfig(systemd)
 
 %description
 No detailed description available
+
+%package autostart
+Summary: autostart components for the swupd-overdue package.
+Group: Default
+
+%description autostart
+autostart components for the swupd-overdue package.
+
 
 %package bin
 Summary: bin components for the swupd-overdue package.
@@ -48,6 +57,7 @@ doc components for the swupd-overdue package.
 
 %build
 export LANG=C
+export SOURCE_DATE_EPOCH=1491342565
 %configure --disable-static
 make V=1  %{?_smp_mflags}
 
@@ -59,15 +69,20 @@ export no_proxy=localhost
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
+export SOURCE_DATE_EPOCH=1491342565
 rm -rf %{buildroot}
 %make_install
 ## make_install_append content
-mkdir -p %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/
-ln -s ../swupd-overdue.service %{buildroot}/usr/lib/systemd/system/multi-user.target.wants/swupd-overdue.service
+mkdir -p %{buildroot}/usr/lib/systemd/system/network-online.target.wants
+ln -s ../swupd-overdue.service %{buildroot}/usr/lib/systemd/system/network-online.target.wants/swupd-overdue.service
 ## make_install_append end
 
 %files
 %defattr(-,root,root,-)
+
+%files autostart
+%defattr(-,root,root,-)
+/usr/lib/systemd/system/network-online.target.wants/swupd-overdue.service
 
 %files bin
 %defattr(-,root,root,-)
@@ -75,7 +90,7 @@ ln -s ../swupd-overdue.service %{buildroot}/usr/lib/systemd/system/multi-user.ta
 
 %files config
 %defattr(-,root,root,-)
-/usr/lib/systemd/system/multi-user.target.wants/swupd-overdue.service
+%exclude /usr/lib/systemd/system/network-online.target.wants/swupd-overdue.service
 /usr/lib/systemd/system/swupd-overdue.service
 
 %files doc
