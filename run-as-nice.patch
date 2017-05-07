@@ -1,0 +1,10 @@
+--- swupd-overdue-5/swupd-overdue.service~	2017-04-11 21:44:09.000000000 +0000
++++ swupd-overdue-5/swupd-overdue.service	2017-05-07 22:39:34.340262046 +0000
+@@ -4,6 +4,7 @@
+ [Service]
+ Type=simple
+ Restart=no
++Nice=10
+ RemainAfterExit=yes
+ ExecStart=/usr/bin/swupd-overdue
+ 

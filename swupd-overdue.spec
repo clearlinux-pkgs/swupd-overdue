@@ -4,7 +4,7 @@
 #
 Name     : swupd-overdue
 Version  : 5
-Release  : 5
+Release  : 6
 URL      : https://github.com/clearlinux/swupd-overdue/releases/download/v5/swupd-overdue-5.tar.xz
 Source0  : https://github.com/clearlinux/swupd-overdue/releases/download/v5/swupd-overdue-5.tar.xz
 Summary  : No detailed summary available
@@ -16,6 +16,7 @@ Requires: swupd-overdue-config
 Requires: swupd-overdue-doc
 BuildRequires : pkgconfig(libsystemd)
 BuildRequires : pkgconfig(systemd)
+Patch1: run-as-nice.patch
 
 %description
 No detailed description available
@@ -55,10 +56,14 @@ doc components for the swupd-overdue package.
 
 %prep
 %setup -q -n swupd-overdue-5
+%patch1 -p1
 
 %build
+export http_proxy=http://127.0.0.1:9/
+export https_proxy=http://127.0.0.1:9/
+export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1492013815
+export SOURCE_DATE_EPOCH=1494196820
 %configure --disable-static
 make V=1  %{?_smp_mflags}
 
@@ -66,11 +71,11 @@ make V=1  %{?_smp_mflags}
 export LANG=C
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
-export no_proxy=localhost
+export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1492013815
+export SOURCE_DATE_EPOCH=1494196820
 rm -rf %{buildroot}
 %make_install
 ## make_install_append content
