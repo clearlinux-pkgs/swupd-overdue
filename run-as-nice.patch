@@ -3,7 +3,7 @@
 @@ -1,9 +1,11 @@
  [Unit]
  Description=Trigger OS Update if an update is overdue
-+After=clr-power
++
  
  [Service]
  Type=simple
