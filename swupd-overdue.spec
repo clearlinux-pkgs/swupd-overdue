@@ -4,7 +4,7 @@
 #
 Name     : swupd-overdue
 Version  : 5
-Release  : 9
+Release  : 10
 URL      : https://github.com/clearlinux/swupd-overdue/releases/download/v5/swupd-overdue-5.tar.xz
 Source0  : https://github.com/clearlinux/swupd-overdue/releases/download/v5/swupd-overdue-5.tar.xz
 Summary  : No detailed summary available
