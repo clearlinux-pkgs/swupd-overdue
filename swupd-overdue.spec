@@ -4,7 +4,7 @@
 #
 Name     : swupd-overdue
 Version  : 6
-Release  : 12
+Release  : 13
 URL      : https://github.com/clearlinux/swupd-overdue/releases/download/v6/swupd-overdue-6.tar.xz
 Source0  : https://github.com/clearlinux/swupd-overdue/releases/download/v6/swupd-overdue-6.tar.xz
 Summary  : No detailed summary available
